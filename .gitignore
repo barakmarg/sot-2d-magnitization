@@ -179,3 +179,14 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+# ---- sot-2d-magnitization: generated data (large, regenerable) ----
+.venv/
+compare/ref/
+*.pt
+*.h5
+sot_testset*.mat
+sot_testset*.npz
+sot_trainset*.mat
+sot_cnn*.mat
+preview_seed_*.png
+residuals_test*.png

@@ -1,0 +1,72 @@
+====================================================================================================
+1) REPLAY TEST: same random numbers in Python as in Octave -> outputs must agree
+====================================================================================================
+  case               map size  maps+labels   net input  two-map dir  all draws used  result
+                               (rel. diff)   (float32)      (angle)
+  baseline_a            98x86      2.2e-14     1.0e-08    0.0e+00deg            True  PASS
+  baseline_b            70x60      3.6e-15     6.0e-09    8.5e-07deg            True  PASS
+  baseline_c           96x118      9.5e-14     2.3e-14    0.0e+00deg            True  PASS
+  strip_bubbles         98x88      3.0e-14     2.1e-14    0.0e+00deg            True  PASS
+  trapezoid            130x96      8.3e-13     1.5e-08    0.0e+00deg            True  PASS
+  polygon_2comp       144x116      6.1e-15     1.5e-09    8.5e-07deg            True  PASS
+  blob_orbital          82x60      1.1e-14     5.4e-09    0.0e+00deg            True  PASS
+  gate_stripe           94x88      1.3e-13     1.2e-08    0.0e+00deg            True  PASS
+  partial_a             92x78      5.6e-13     2.7e-09    0.0e+00deg            True  PASS
+  partial_b             72x76      2.0e-12     2.3e-14    8.5e-07deg            True  PASS
+  real_noise           96x110      3.0e-13     2.8e-14    0.0e+00deg            True  PASS
+  thick_film            98x96      2.3e-13     2.3e-14    0.0e+00deg            True  PASS
+  -> all maps and labels agree to a relative 2.0e-12 (tolerance 1e-09), float32 network inputs to 1e-06: PASS
+
+====================================================================================================
+2) PHYSICS CHECKS (sot_run_checks)
+====================================================================================================
+  Octave: Check 1: FFT vs direct dipole sum, max rel. diff = 0.51%
+  Python: Check 1: FFT vs direct dipole sum, max rel. diff = 0.51%
+          -> identical
+  Octave: Check 2: theta_s =  +0 deg: max +33.6 nT at x = -1.09 um, min -25.5 nT at x = -1.51 um
+  Python: Check 2: theta_s =  +0 deg: max +33.6 nT at x = -1.09 um, min -25.5 nT at x = -1.51 um
+          -> identical
+  Octave: Check 2: theta_s = +45 deg: max +52.6 nT at x = +1.21 um, min -46.9 nT at x = -1.39 um
+  Python: Check 2: theta_s = +45 deg: max +52.6 nT at x = +1.21 um, min -46.9 nT at x = -1.39 um
+          -> identical
+  Octave: Check 2: theta_s = -45 deg: max +52.6 nT at x = -1.21 um, min -46.9 nT at x = +1.39 um
+  Python: Check 2: theta_s = -45 deg: max +52.6 nT at x = -1.21 um, min -46.9 nT at x = +1.39 um
+          -> identical
+  Octave: Check 3: simulated lock-in 0.5835 vs formula (2/pi)sqrt(1-a^2) = 0.5835
+  Python: Check 3: simulated lock-in 0.5835 vs formula (2/pi)sqrt(1-a^2) = 0.5835
+          -> identical
+  Octave: Check 4: thick film (20 nm) vs 40 stacked sheets, max rel. diff = 0.000%
+  Python: Check 4: thick film (20 nm) vs 40 stacked sheets, max rel. diff = 0.000%
+          -> identical
+  -> PASS
+
+====================================================================================================
+3) STATISTICS: 200 samples, each language with its OWN random numbers
+====================================================================================================
+  quantity                                Octave mean  Python mean  KS p-value
+  label shape_type                              2.525        2.555       0.965
+  label n_arms                                   0.78        0.765       1.000
+  label n_bubbles                                0.72         0.65       0.988
+  label dx_out                                0.07875      0.07925       1.000
+  label fov_x                                   7.338        7.288       0.988
+  label fov_y                                   7.717        7.678       1.000
+  label area                                    9.682        9.028       0.394
+  label fov_cover                              0.1654       0.1566       0.022
+  label n_comp                                   1.37         1.39       1.000
+  label c1_theta                                92.42         88.8       0.270
+  label c1_phi                                  15.41      -0.4284       0.394
+  label log10 sigma0                            13.42         13.5       0.793
+  label thickness                            0.005207     0.004333       0.394
+  label h                                      0.1855       0.1866       0.628
+  label d_tip                                  0.1935       0.1953       0.328
+  label extra                                   0.335        0.345       1.000
+  label noise_frac                             0.1537         0.15       0.793
+  label mask_blur                             0.04002      0.04259       0.466
+  log10 peak |Bz| (field along z)               3.422        3.488       0.866
+  peak |Bz tilt| / peak |Bz zero|                1.12        1.259       0.466
+  mask: covered fraction of frame              0.1654       0.1566       0.022
+  noise rms / peak (measured)                  0.1587       0.1555       0.866
+  pixels per map                            1.023e+04    1.006e+04       0.924
+  -> 0 of 23 distributions differ at p < 0.01 (expected by chance: 0.23): PASS
+
+OVERALL: PASS
